@@ -41,11 +41,13 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.RELEASE_TOKEN }}
 
       - name: setup commit user
         run: |
-          git config user.name "Github Actions Bot"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "Releaser Astronaut"
+          git config user.email "78322057+ius-release-bot@users.noreply.github.com"
 
       - name: Bump a new version
         run: |
@@ -69,5 +71,5 @@ jobs:
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.RELEASE_TOKEN }}
           publish_dir: ./build
